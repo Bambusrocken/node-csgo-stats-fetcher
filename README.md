@@ -15,6 +15,7 @@ The received data is sent to a webserver using a REST call.
 
 # Data structure
 Below is an example of the data structure that is sent to the specified endpoint:
+```json
 { 
     steamid: '76561198201294963',
     avatar: 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatar/fe/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg',
@@ -23,3 +24,4 @@ Below is an example of the data structure that is sent to the specified endpoint
     wins: 164,
     updateDate: 2016-12-12T21:25:11.268Z 
 }
+```
