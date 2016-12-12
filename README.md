@@ -11,7 +11,7 @@ The received data is sent to a webserver using a REST call.
 # Installation:
 1. Download this package
 2. Run `npm install` from your terminal
-3. Rename example.config.json to config.json and modify it with your account credentials, Steam API key and REST Endpoint URL to which the data needs to be sent.
+3. Rename `example.config.json` to `config.json` and modify it with your account credentials, Steam API key and REST Endpoint URL to which the data needs to be sent.
 
 # Data structure
 Below is an example of the data structure that is sent to the specified endpoint:
@@ -22,6 +22,6 @@ Below is an example of the data structure that is sent to the specified endpoint
     "name" : "Din Viezel",
     "rank" : 14,
     "wins" : 164,
-    "updateDate" : "2016-12-12T21:25:11.268Z "
+    "updateDate" : "2016-12-12T21:25:11.268Z"
 }
 ```
