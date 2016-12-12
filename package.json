@@ -1,0 +1,26 @@
+{
+  "name": "node-csgo-stats-fetcher",
+  "version": "1.0.0",
+  "description": "A bot on Steam that fetches CS:GO statistics of specified accounts. The data is sent to a webserver using a REST call to store it in a database.",
+  "main": "steambot.js",
+  "dependencies": {
+    "globaloffensive": "^1.2.0",
+    "steam": "^1.4.0",
+    "request": "^2.79.0",
+    "steam-user": "^3.13.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WilcoB/node-csgo-stats-fetcher.git"
+  },
+  "author": "Chilco",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WilcoB/node-csgo-stats-fetcher/issues"
+  },
+  "homepage": "https://github.com/WilcoB/node-csgo-stats-fetcher#readme"
+}

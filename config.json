@@ -1,0 +1,9 @@
+{
+  "accountName" : "",
+  "password" : "",
+
+  "STEAM_API_KEY" : "",
+  "REQUEST_DELAY" : 1000,
+  "STATS_CHECK_DELAY" : 600000,
+  "REST_ENDPOINT_URL" : "http://localhost:3000/csgoprofile/"
+}
