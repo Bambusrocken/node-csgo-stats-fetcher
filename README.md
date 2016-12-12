@@ -3,7 +3,6 @@ A bot on Steam that fetches CS:GO statistics of specified accounts.
 The data is sent to a webserver using a REST call to store it in a database.
 
 # Requirements
-* node-steam
 * node-steam-user
 * node-globaloffensive
 * request
