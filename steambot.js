@@ -91,7 +91,7 @@ function updateCSGOStats(steamid, data) {
         json: accountsToLookUp[queueIndex]
     }, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-            console.log(body.message);
+            console.log(body);
         }
     })
 }
