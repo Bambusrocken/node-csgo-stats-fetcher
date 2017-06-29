@@ -86,7 +86,7 @@ function updateCSGOStats(steamid, data) {
     accountsToLookUp[queueIndex].wins = data.ranking.wins;
     accountsToLookUp[queueIndex].updateDate = new Date();
 
-    request.put({
+    request.post({
         url: config.REST_ENDPOINT_URL,
         json: accountsToLookUp[queueIndex]
     }, function (error, response, body) {
