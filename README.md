@@ -11,7 +11,7 @@ The received data is sent to a webserver using a REST call.
 # Installation:
 1. Download this package
 2. Run `npm update` from your terminal
-3. Rename `example.config.json` to `config.json` and modify it with your account credentials, Steam API key and REST Endpoint URL to which the data needs to be sent.
+3. Rename `example.config.json` to `config.json` and modify it with your account credentials, Steam API key, REST Endpoint URL to which the data needs to be sent and the accounts from which the CS:GO statistics are to be looked up from.
 
 # Data structure
 Below is an example of the data structure that is sent to the specified endpoint:
