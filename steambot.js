@@ -15,7 +15,7 @@ var queueIndex = -1;
 client.logOn(logOnOptions);
 client.on('loggedOn', function() {
     console.log('> Logged into Steam with', logOnOptions.accountName);
-    client.setPersona(steamUser.EPersonaState.Offline);
+    client.setPersona(steamUser.EPersonaState.Online);
     client.gamesPlayed([730]);
 });
 
