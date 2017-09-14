@@ -6,38 +6,36 @@ const config = require('./config.json');
 const client = new steamUser();
 const csgo = new globalOffensive(client);
 const logOnOptions = {
-    accountName: config.accountName,
-    password: config.password
+    accountName: config.STEAM_ACCOUNT.name,
+    password: config.STEAM_ACCOUNT.password
 };
-
+const accountsToLookUp = config.ACCOUNTS_TO_LOOKUP;
 var queueIndex = -1;
-const accountsToLookUp = [
-    { steamid : '76561198034821979' }, // Chilco
-    { steamid : '76561198170561354' }, // Vin Diezel
-    { steamid : '76561198201294963' }, // Din Viezel
-    { steamid : '76561198246968446' }  // Boktor
-];
 
 client.logOn(logOnOptions);
 client.on('loggedOn', function() {
-    console.log('Logged into Steam.');
-    client.setPersona(steamUser.EPersonaState.Online);
+    console.log('> Logged into Steam with', logOnOptions.accountName);
+    client.setPersona(steamUser.EPersonaState.Offline);
     client.gamesPlayed([730]);
 });
 
 csgo.on('connectedToGC', function () {
-    console.log('Connected to Game Coordinator.');
-    startFetchingAllPlayerStats();
-    setInterval(startFetchingAllPlayerStats, config.STATS_CHECK_DELAY);
+    console.log('> Connected to Game Coordinator');
+    startFetchingData();
 });
 
-function startFetchingAllPlayerStats() {
-    queueIndex = -1;
-    getNameAndAvatarOfAccounts();
-    fetchAllPlayerStats();
+/**
+ * Start fetching all CS:GO data of all accounts that are configured to be looked up.
+ */
+function startFetchingData() {
+    fetchAllPlayerNamesAndAvatars();
+    fetchAllPlayerGameStatistics();
 }
 
-function getNameAndAvatarOfAccounts() {
+/**
+ * Fetches all names and avatars of all accounts that are configured to be looked up.
+ */
+function fetchAllPlayerNamesAndAvatars() {
     function makeSteamIdsString() {
         var steamids = '';
         for (var i = 0; i < accountsToLookUp.length; i++) {
@@ -66,21 +64,32 @@ function getNameAndAvatarOfAccounts() {
     });
 }
 
-function fetchAllPlayerStats() {
+/**
+ * Recursively fetches all game statistics of all accounts that are configured to be looked up.
+ */
+function fetchAllPlayerGameStatistics() {
     queueIndex ++;
     if (queueIndex >= accountsToLookUp.length) {
         queueIndex = -1;
+        setTimeout(startFetchingData, config.STATS_CHECK_DELAY); // The STATS_CHECK_DELAY is the interval
         return;
     }
 
-    console.log('Fetching: ' + accountsToLookUp[queueIndex].steamid + '...');
+    var currentlyFetchingSteamId = accountsToLookUp[queueIndex].steamid;
+
+    console.log('> Fetching CS:GO statistics of steamid: ' + currentlyFetchingSteamId + '...');
     csgo.requestPlayersProfile(accountsToLookUp[queueIndex].steamid, function(response) {
-        updateCSGOStats(accountsToLookUp[queueIndex].steamid, response);
+        postPlayerGameStatistics(currentlyFetchingSteamId, response);
     });
-    setTimeout(fetchAllPlayerStats, config.REQUEST_DELAY);
+    setTimeout(fetchAllPlayerGameStatistics, config.TIME_INBETWEEN_ACCOUNT_LOOKUPS);
 }
 
-function updateCSGOStats(steamid, data) {
+/**
+ * Sends a POST request with account data to the configured REST endpoint.
+ * @param {Number} steamid
+ * @param {Object} data
+ */
+function postPlayerGameStatistics(steamid, data) {
     accountsToLookUp[queueIndex].steamid = steamid;
     accountsToLookUp[queueIndex].rank = data.ranking.rankId;
     accountsToLookUp[queueIndex].wins = data.ranking.wins;
@@ -91,7 +100,9 @@ function updateCSGOStats(steamid, data) {
         json: accountsToLookUp[queueIndex]
     }, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-            console.log(body);
+            console.log('>', body.message);
+        } else {
+            console.log('> Failed to POST game statistics of steamid:', steamid);
         }
     })
 }

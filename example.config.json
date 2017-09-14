@@ -1,9 +1,13 @@
 {
-  "accountName" : "steam_account_name",
-  "password" : "steam_password",
-
+  "STEAM_ACCOUNT" : {
+    "name": "steam_account_name",
+    "password": "steam_password"
+  },
   "STEAM_API_KEY" : "steam_api_key",
-  "REQUEST_DELAY" : 1000,
-  "STATS_CHECK_DELAY" : 600000,
-  "REST_ENDPOINT_URL" : "http://localhost:3000/csgoprofile/"
+  "TIME_INBETWEEN_ACCOUNT_LOOKUPS" : 1500,
+  "STATS_CHECK_DELAY" : 30000,
+  "REST_ENDPOINT_URL" : "http://localhost:8000/api/profile",
+  "ACCOUNTS_TO_LOOKUP" : [
+    { "steamid" : "76561198034821979" }
+  ]
 }
