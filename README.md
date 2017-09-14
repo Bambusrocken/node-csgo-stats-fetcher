@@ -10,7 +10,7 @@ The received data is sent to a webserver using a REST call.
 
 # Installation:
 1. Download this package
-2. Run `npm install` from your terminal
+2. Run `npm update` from your terminal
 3. Rename `example.config.json` to `config.json` and modify it with your account credentials, Steam API key and REST Endpoint URL to which the data needs to be sent.
 
 # Data structure
