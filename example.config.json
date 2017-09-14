@@ -8,6 +8,7 @@
   "STATS_CHECK_DELAY" : 30000,
   "REST_ENDPOINT_URL" : "http://localhost:8000/api/profile",
   "ACCOUNTS_TO_LOOKUP" : [
-    { "steamid" : "76561198034821979" }
+    { "steamid" : "76123456789123456" },
+    { "steamid" : "76123456789123457" }
   ]
 }
